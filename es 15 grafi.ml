@@ -10,11 +10,11 @@ let add (x, y) g = (x, y) :: g;;
 
 (*2. Definire remove : ’a -> ’a graph -> ’a graph che toglie un nodo da un grafo – quindi toglie tutti i archi che contengono quel nodo*)
 
-let rec remove x g = 
-  match (x,g) with 
-  |(x,[])-> []
-  |(x,(x1,y1)::rest ) when (x=x1 || x=y1) -> remove x rest 
-  |(x,(x1,y1)::rest) -> (x1,y1)::(remove x rest);; 
+let rec remove x g=
+  match g with
+  |[]->[]
+  |(x1, y1)::rest ->( if (x=x1 || x=y1) then remove x rest
+                      else (x1, y1)::(remove x rest));;
 
 (*3. Definire transpose : ’a graph -> ’a graph che inverte tutti i archi di un grafo*)
 

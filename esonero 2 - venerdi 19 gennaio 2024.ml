@@ -39,8 +39,13 @@ let rec apply f lst t =
 
 (*4 Usando la funzione aplly definire substri: 'a btree -> ind -> 'a btree -> 'a btree che prende un albero t0 un indirizzo ind e un albero t e sostituisce il sotto albero di t 
   in ind con t0 substi t0 [Left;Rigth] Tr(0,Tr(2,Tr(1,Empty,Empty), Tr(0,Empty,Empty)),Tr (5,Empty,Empty)). restituisce Tr(0,Tr(2,Tr(1,Empty,Empty), t0),Tr (5,Empty,Empty)).*)
-    
-let substri t0 = apply t0 lst t;; 
+
+let rec substri t0 ind t =
+  match lst,t with 
+  | [], Tr(v,l,r) -> t0
+  | Left::rest, Tr(v, l, r) -> substri t0 rest l
+  | Right::rest, Tr(v, l, r) -> substri t0 rest r
+  | _, Empty -> raise TroppoLunga;; 
 
 (***********************************************************************************************************************************************************************************)
 
